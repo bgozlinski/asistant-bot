@@ -19,3 +19,8 @@ class AddressBook(UserDict):
                     break
 
         return results
+
+    def iterator(self, N):
+        records = list(self.data.values())
+        for i in range(0, len(records), N):
+            yield records[i:i+N]

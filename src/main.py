@@ -1,5 +1,6 @@
 from addressbook import AddressBook
 from record import Record
+from datetime import datetime
 
 
 def main():
@@ -20,7 +21,11 @@ def main():
         if choice == '1':
             name = input('Enter name: ')
             phones = input('Enter phones (comma separated): ').split(",")
-            record = Record(name, phones)
+            birthday_input = input('Enter birthday (YYYY-MM-DD) or leave blank: ')
+            birthday = None
+            if birthday_input:
+                birthday = datetime.strptime(birthday_input, '%Y-%m-%d').date()
+            record = Record(name, phones, birthday)
             address_book.add_record(record)
 
         elif choice == '2':
@@ -60,7 +65,9 @@ def main():
         elif choice == '6':
             if address_book.data:
                 for name, record in address_book.data.items():
-                    print(f'Name: {name} Phones: {[phone.value for phone in record.phones]}')
+                    days_to_birthday = record.days_to_birthday()
+                    birthday_msg = f", Days to birthday: {days_to_birthday}" if days_to_birthday is not None else ""
+                    print(f'Name: {name} Phones: {[phone.value for phone in record.phones]}{birthday_msg}')
             else:
                 print('No records found.')
         elif choice == '7':
