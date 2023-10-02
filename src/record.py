@@ -29,3 +29,17 @@ class Record:
             if p.value == old_phone:
                 p.value = new_phone
                 break
+
+    def to_json(self):
+        return {
+            'name': self.name.value,
+            'phones': [phone.value for phone in self.phones],
+            'birthday': self.birthday.value.strftime('%Y-%m-%d') if self.birthday else None
+        }
+
+    @classmethod
+    def from_json(cls, json_data):
+        name = json_data['name']
+        phones = json_data['phones']
+        birthday = datetime.strptime(json_data['birthday'], '%Y-%m-%d').date() if json_data['birthday'] else None
+        return cls(name=name, phones=phones, birthday=birthday)

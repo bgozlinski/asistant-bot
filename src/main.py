@@ -5,6 +5,7 @@ from datetime import datetime
 
 def main():
     address_book = AddressBook()
+    address_book.load_from_file()
 
     while True:
         print('\nMenu:')
@@ -14,7 +15,9 @@ def main():
         print('4. Remove phone from record')
         print('5. Find record')
         print('6. Show all records')
-        print('\n7. Exit')
+        print('7. Save address book to file')
+
+        print('\n8. Exit')
 
         choice = input('Please choose an option: ')
 
@@ -70,7 +73,11 @@ def main():
                     print(f'Name: {name} Phones: {[phone.value for phone in record.phones]}{birthday_msg}')
             else:
                 print('No records found.')
+
         elif choice == '7':
+            address_book.save_to_file()
+
+        elif choice == '8':
             break
 
         else:
