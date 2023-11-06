@@ -11,7 +11,7 @@ def main():
 
     while True:
         ui.display_menu()
-        choice = input('Please choose an option: ')
+        choice = ui.get_input('Please choose an option: ')
 
         if choice == '1':
             name = ui.get_input('Enter name: ')
