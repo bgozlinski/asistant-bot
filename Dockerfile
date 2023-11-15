@@ -4,8 +4,8 @@ RUN apt-get update
 
 WORKDIR /app
 
-COPY ./asistant-bot /app/asistant-bot
+COPY ./src /app/asistant-bot
 
 WORKDIR /app/asistant-bot
 
-CMD ["python", "/app/asistant-bot/src/main.py"]
+CMD ["python", "/app/asistant-bot/main.py"]
